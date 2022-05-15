@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+	<title>Help Desk</title>
+</head>
+
+<body>
+
+	<div class="app" id="app">
+
+		<div class="app__container">
+			<div class="app__body">
+				<button type="button" class="app__add-btn">Добавить тикет</button>
+				<ul class="app__tasks">
+					<!-- <li class="app__task task-app">
+						<div class="task-app__main">
+							<div class="task-app__left">
+								<div class="task-app__checkbox">
+								</div>
+								<span class="task-app__text">Lorem ipsum dolor sit amet, consectetur adipiscing
+									elit</span>
+							</div>
+							<div class="task-app__right">
+								<span class="task-app__date">10.03.19 08:40</span>
+								<div class="task-app__conrollers task-controllers">
+									<div class="task-controllers__controller controller-edit"></div>
+									<div class="task-controllers__controller controller-delete"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="task-app__details">
+							<p class="task-app__text">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+								consectetur adipiscing elit.
+							</p>
+						</div>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="popup add-ticket-popup">
+		<h2 class="popup__title">
+			Добавить тикет
+		</h2>
+		<form action="" class="popup__form form-popup" id="add-ticket-form">
+			<label class="form-popup__label" for="add-brief-description">Краткое описание</label>
+			<input type="text" name="name" class="form-popup__input" id="add-brief-description">
+			<label class="form-popup__label" for="add-detailed-description">Подробное описание</label>
+			<textarea class="form-popup__textarea" name="description" id="add-detailed-description"></textarea>
+			<div class="popup__buttons">
+				<button class="popup__btn cancel-btn">Отмена</button>
+				<button class="popup__btn ok-btn">Ok</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="popup edit-ticket-popup">
+		<h2 class="popup__title">
+			Изменить тикет
+		</h2>
+		<form action="" class="popup__form form-popup" id="edit-ticket-form">
+			<label class="form-popup__label" for="edit-brief-description">Краткое описание</label>
+			<input type="text" class="form-popup__input" name="name" id="edit-brief-description">
+			<label class="form-popup__label" for="edit-detailed-description">Подробное описание</label>
+			<textarea class="form-popup__textarea" name="description" id="edit-detailed-description"></textarea>
+			<div class="popup__buttons">
+				<button class="popup__btn cancel-btn">Отмена</button>
+				<button class="popup__btn ok-btn">Ok</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="popup delete-ticket-popup">
+		<h2 class="popup__title">
+			Удалить тикет
+		</h2>
+		<span class="popup__alert">Вы уверены, что хотите удалить тикет? Это действие необратимо.</span>
+		<div class="popup__buttons">
+			<button class="popup__btn cancel-btn">Отмена</button>
+			<button class="popup__btn ok-btn">Ok</button>
+		</div>
+	</div>
+
+</body>
+
+</html>
