@@ -74,14 +74,19 @@ export default class Ticket {
         !evt.target.classList.contains('controller-edit') &&
         !evt.target.classList.contains('controller-delete')
       ) {
-        if (!this.detailsDiv.classList.contains('show'))
+        if (!this.detailsDiv.classList.contains('show')) {
           this.server.getFullTicket(this.id).then((response) => {
-            this.detailsText.textContent = response.description;
+            if (response.description) {
+              this.detailsText.textContent = response.description;
+              this.detailsDiv.classList.add('show');
+              return;
+            } else {
+              return;
+            }
           });
-        this.detailsDiv.classList.add('show');
-        return;
-      } else {
-        this.detailsDiv.classList.remove('show');
+        } else {
+          this.detailsDiv.classList.remove('show');
+        }
       }
 
       if (evt.target.classList.contains('task-app__checkbox')) {
@@ -94,7 +99,9 @@ export default class Ticket {
         }
 
         const data = { id: this.id, status: this.status };
-        this.server.POSTData(data, 'editTicket');
+        this.server
+          .POSTData(data, 'editTicket')
+          .then((response) => console.log(response.status));
         return;
       }
 
@@ -108,10 +115,10 @@ export default class Ticket {
             return;
           } else if (evt.target.classList.contains('ok-btn')) {
             const formData = new FormData(evt.currentTarget);
-            this.name = formData.get('name');
-            this.description = formData.get('description');
-            this.textEl.textContent = this.name;
-            this.detailsText.textContent = this.description;
+            this.name = formData.get('name') ? formData.get('name') : this.name;
+            this.description = formData.get('description')
+              ? formData.get('description')
+              : this.description;
 
             const data = {
               id: this.id,
@@ -119,7 +126,10 @@ export default class Ticket {
               description: this.description,
             };
 
-            this.server.POSTData(data, 'editTicket');
+            this.server.POSTData(data, 'editTicket').then((response) => {
+              this.textEl.textContent = response.name;
+              this.detailsText.textContent = response.description;
+            });
             editTicketForm.reset();
             editTicketForm.closest('.popup').classList.remove('show');
             return;
@@ -136,10 +146,14 @@ export default class Ticket {
             return;
           } else if (evt.target.classList.contains('ok-btn')) {
             const data = { id: this.id };
-            this.server.POSTData(data, 'deleteTicket');
-            document.querySelector(`[data-id='${this.id}']`).remove();
-            deleteTicketPopup.classList.remove('show');
-            return;
+            this.server.POSTData(data, 'deleteTicket').then((response) => {
+              if (response.status) {
+                document.querySelector(`[data-id='${response.id}']`).remove();
+                deleteTicketPopup.classList.remove('show');
+              } else {
+                return;
+              }
+            });
           }
         });
       }

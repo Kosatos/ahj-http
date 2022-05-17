@@ -6,7 +6,7 @@ window.onload = () => {
 
   const ticketList = document.querySelector('.app__tasks');
   const addTicketForm = document.getElementById('add-ticket-form');
- 
+
   [...document.forms].forEach((form) => {
     form.addEventListener('submit', (evt) => evt.preventDefault());
   });
@@ -42,6 +42,10 @@ window.onload = () => {
 
   function addTicket(evt) {
     const formData = new FormData(evt.currentTarget);
+    if (!formData.get('name')) {
+      console.error('Поле не может быть пустым');
+      return;
+    }
     const data = {
       name: formData.get('name'),
       status: false,
